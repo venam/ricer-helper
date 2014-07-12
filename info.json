@@ -1,0 +1,30 @@
+{
+	"raw": {
+		"Bootloader" : "Background\nMenus\nFont\nsplash screen\nboot messages",
+		"Shell": "lightweight\ninteractive\naliases\ntab completion\nPrompt\nhttp://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/\nhttp://blog.twistedcode.org/2008/03/customizing-your-bash-prompt.html (dotdev) A simple guide for customizing bash prompts",
+		"multiplexers":"",
+		"TTY":"font\nframebuffer\ncolors (perl-term-extendedcolor-tty or just using `echo`)\nframebuffer consoles (mlterm)",
+		"Login managers":"bakcgrounds\ninput boxes\ntheme\nPAM (special plugin for Authentification)\ntype (TTY: HTML: ...)\nttys/gettytab login"
+	},
+	"de/wm" : {
+		"DE":"Borders\nKeybindings\nTiling/floating\nconfigs (different type)",
+		"Window manager":"",
+		"Compositor manager":"",
+		"Status/Information system":"",
+		"GUI": "",
+		"Wallpaper":""
+	},
+	"common applications" : {
+		"Terminal emulator" : "",
+		"IM" : "",
+		"Media player": "",
+		"Text editor" : "",
+		"Web browser" :""
+	},
+	"others" : {
+		"color scripts" :"",
+		"Notification system": "",
+		"Monitoring Programs" : ""
+	}
+}
+

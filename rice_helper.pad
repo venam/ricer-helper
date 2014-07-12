@@ -1,0 +1,307 @@
+https://titanpad.com/gtvzILOtdT
+
+Shit that can be riced  ヽ(^。^)丿
+
+NEXT AFTER THE BRAINSTORM IS DONE:
+do a interaction diagram (how the program is going to be used)
+from that we'll know what kind of information we need about every part and 
+how to display it (description, tips, links, submenu, images,...) what interaction style
+to use (do some mockup of it), etc..
+
+PROGRAM NAME
+==============
+ricer
+(〃￣д￣)八( ￣д￣ )八( ￣д￣ )八( ￣д￣ )八( ￣д￣ )八(￣д￣〃)  
+cftk (config tracker)
+ricer tracker?
+
+USE CASES
+==========
+1) Open the Program Presented with the last section visited
+2) search for a keyword...(only if the interface is bad)
+3) Go into a specific section and check the info/links/description
+4) tick a box as it being in the current install
+5) load / save configs/setup(of the program) in a readable manner
+6) add a new section/edit --> send it online for approval ~~most tricky one
+    or just add a comment section that will be exported with the config
++      venam │ as in 2 cases or "I don't know what I'm doing what's that thing called a shell... oh that's it, let's see what I can do and add it in the comments" or 
+                second case "I wanna keep track of what I did
+ +      venam │ config in my shell, ah yeah I forgot to add my aliases"
+ +      venam │ and I don't want the feel of having only a range of choices for softwares "ah my custom panel that I just wrote isn't in the list what should I do"
+
+REQUIREMENTS
+=============
+easily browseable definition/links/info of things by sections
+easy way to recognize what has been selected and rebrowse through it
+links should be visible
+save config/setup of the program
+editable output format (to stdout)
+editable places to keep track of custom actions
+pluggable/easy to add new things (programming side)
+local / portable
+
+MOCKUPS/ INTERACTION STYLE / UI/ UX:
+Do a general drawing of the interface to see what fits better,
+choose the type of interaction (~available~):
+Webapp
+Curses
+GUI / WIMP (example: gtk3 with gotk3)
+
+Designs& mockups
+http://i.imgur.com/pLQzI48.png (z3bra not sure about that huge list of tabs and it's missing some of the requirements)
+http://pub.iotek.org/p/lLnQKBD.png (venam, menu on the left unfolds when clicked, the ticked part are the one where something has been selected not so sure about the comment/links part with the add/remove button and drop box, also ot sure about the sub-sub-sections and other inside things, the search seems weird and useless)
+http://imgur.com/a/sT8GF#0 (z3bra, everything is arranged by function, and the user can interact with each element by clicking on the section he wants to be displayed.
+The tree based thing is something like:
+    bootloader
+        |-- background
+        |-- menus
+        |-- font
+        |-- splash screen
+        `-- boot message
+It's a graphical representation of all the options (should not go deeper than 1 sublevel) I'm not sure about how the tabs are arranged.
+http://pub.iotek.org/p/Mum9UYL.png (venam edited following the last conversation on IRC it looks way more simple and cleaner than before, it's add/edit comment, still don't know about the export or show config. maybe the export button show a popup that let's you or printout or save as config that can be imported, maybe the bottom buttons can be put at the top instead. How do we make things fit in the description box? Is it enough space? Do we add a scrollbar?
+http://i.imgur.com/xkyfi8Q.png (dotdev) I like this one! It looks simple, but seems to provide all the things listed in requirements. It will need some tweaks to make everything more intuitive, but it's a good start IMO
+It does, actually it's the same as the one I did above but with diffeent colors and it's missing the "selection" feature
+http://i.imgur.com/hzwxBeS.png (jolia) Here you are mine, nothing is right sized or whatever, no colors. Just raw! Hope it will help! why is the raw alone at the bottom and how do you select a thing? Why nawt? By clicking on it? Fu u venam :3
+
+
+CLASS DIAGRAMS
+===============
+http://pub.iotek.org/p/lnX6XrJ.jpg    (venam: with this diagram we can update the info.json from a server, comparing hash to know if there are updates or not, and if we use dynamic module loading for the outputers we can easily add new ones)
+
+http://pub.iotek.org/p/zEHe4GQ.jpg (kirby: this is real simple, probably too simple to be honest. Feel free to rip into it, I made it in like 5 minutes. Anyway, the main point is that each thing that can be riced has it's own object, storing the text about it and a pointer to the config and comments, as well as methods to write the comments, add them etc. The config class allows us to define the indivudal configs, write them in memory and write them to the various output formats. The interface class has a big array of all the things that can be riced and points to the one currently being viewed, and has functions to draw the interface and handle input and all that standard stuff).
+    are the wm,de, etc.. subclass of things that can be riced?
+    I thought that at first but unless they need specific functions I don't think so. I now think they should just be objects?
+    thi way it's extremely hard to update the infos. You'll need to redownload the whole program.
+    Oh that's a good point, didn't think of that. You were thinking of pulling it from a server at start-up weren't you?
+    more like adding an "update" button that would compare the hash of the info json file on the server with the current  one. If it differs it'll redownload it and reparse it instantly. That's why in my diagram I completely separated the "State" and the "Info" 
+    Fair enough. You could do that with mine if it pulled the info from a file at the object's creation and we checked those files, but that still leaves missing pieces from my diagram. You seem to have it down better than me :p
+Oops.
+    Doesn't matter, we still need different opinions. Just to be sure of the path we take. One thing I didn't want to do is to actually create object for the specific parts (WM, RAW,etc..) I want it to be build depending of the info file (be it json or other format) so it can be easily swapped.
+    Your diagram is totally valid. Keep it here. I'm glad so much people are helping out.
+    It looks like a fun project and I don't have anything better to do :p
+    I'll buzz more trusted people on irc, I want some more diagrams, like that I can actually start writing some code.
+    A scripting language would be the best thing
+    Agreed, any thoughts on which in particular?
+    Jolia, Z3bra, and I were discussing that earlier. Dynamic loading of modules is easily done in Python and it's an easy language. We were also thinking of using C/C++ with an embedded lua interpreter but that might turn out very difficult for such a simple project.
+    I'm more immediatly useful in C++, but I can try and learn Python (can't be too hard?). That's probably best.
+    Python is the easiest language there is to learn. It's deja-vu all the way. the only drawback is the indentation. Also, the people installing the program should already have the interpreter/ or the program should be easily distributable.
+    Python2 or 3? IDK 'k. AFAIK it doesn't differ that much.
+    Once we have some code running and something that start to work a bit we can open a thread on the forums and invite more opinion/people to help
+
+I'll wait till we have 2-3 more class diagram or other kinds of modeling diagrams before we start implementing it.
+
+
+SECTIONS
+========
+Section I (raw: Bootloader, TTY, shells)
+
+Bootloader
+    Background
+    Menus
+    Font
+    splash screen
+    boot messages
+Shell
+    lightweight
+    interactive
+    aliases
+    tab completion
+    Prompt
+http://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/
+http://blog.twistedcode.org/2008/03/customizing-your-bash-prompt.html (dotdev) A simple guide for customizing bash prompts
+
+    terminal multiplexers/dtach/dvtm & others
+
+TTY
+    font
+    framebuffer
+    colors (perl-term-extendedcolor-tty or just using `echo`)
+    framebuffer consoles (mlterm)
+
+Login managers
+    bakcgrounds
+    input boxes
+    theme
+    PAM (special plugin for Authentification)
+    type (TTY, HTML, ...)
+    ttys/gettytab login
+
+
+Section II (DE/WMs)
+
+Window manager
+    Borders
+    Keybindings
+    Tiling/floating
+    configs (different type)
+
+Compositor manager
+    transparency
+    shadows
+
+Status bar/ panels/ docks/ conky
+    Icons
+    Colors
+    Informations
+    Geometry
+    Font
+    Popups
+
+Graphical applications (GTK)
+    Icons
+    Theme
+    font
+    mouse cursor
+
+Wallpaper
+    Tiled
+    Scaled
+    Random
+
+Section III (Common applications)
+
+Terminal emulator
+    Font
+    Colours
+    plugins
+
+Chat client
+    Nickname alignement
+    Colors
+    Informations
+    Plugins
+    ----
+    weechat
+    irssi
+
+Music player
+    Colors
+    Equalizer
+    Visualizer
+    cmus
+    ncmpcpp
+
+Text editor
+    Syntax highlighting
+    Theme
+    Background
+    Informations
+    Plugins
+    ----
+    Vim master_race
+    Emacs
+    Gedit
+
+Web browser
+    Tab bar
+    User's CSS
+    whole firefox
+    start page
+
+Section IV (Others)
+
+Mini script to show off colors
+Notification system
+Monitoring Programs
+
+
+DISCUSSIONS
+===========
+Seems like a portable library for rice but with only the minimum info and links and things that you can tick/choose as being install, so you have a general idea of what the system is like
+What do you think? I quite like the idea
+
+Not sure to get what you want... Is it supposed to INSTALL things ? or just provide an overall idea of what should be installed to rice a setup ?
+The later, with help of what things are and tips
+
+for example (a kind of menu thing like in cmus/ranger that shows description on the right):
+[Bootloader]  |  A bootloader is the program responsable for loading the OS
+ a ot             |  In the world of ricing ....
+  b                |
+   c               |
+Then if you go inside the Bootloader section you have more info. If you did some ricing inside the bootload it will be highlighted and you add or choose what you've done 
+
+Basically, an interactive transportable tutorial, or check list.  yep
+It'll be amazing for beginners Yeah I totally agree
+Okay so now we're OK on what will be the end-product...
+Let's get ideas from other people.
+
+Doing as a website would be easier to handle people posting their own configs and editing but it's not portable. Yeah I know, but making a website is REALLY easy, and would give an overall idea (a sketch) of HOW the program will work. Morevover, it will be easier for people to contribute at first:
+    * add a section : mkdir section
+    * add a description : $EDITOR section/README
+
+If that's the case there'll be login/sessions to keep track of what the user has done
+Well choose the type of interface will come later when we are sure of what we want it to look like and what information will be inside I've been thinking it can be stored in the localStorage if it's made for the web. (we'll see later on)
+Git commit already provide a track of what everybody does. Then you'd be able to sort pull requests out
+If it's a website it can turn like an interactive helper wiki or rice but that might be too much work, let's aim for the most simplistic thing atm.
+I proposed a website, but what I meant was actually using directories/files to represent the structure/content of the program. Then, when it's sorted/validated, start creating the program itself. It's just that files and such will make creating content easier
+UI mockup, we'll do a lot of designs and improve bit by bit before starting the coding part of the project. Using dir is a valid way of having a general view of the structure (internal linking), if it's easily browsable.
+Let's get another person here. Who ?IDK, someone who's knowledgeable
+tete de cul par exemple haha
+The idea is nice also because it helps to keep track of your install to redo them later. Good point :P
+Taking in consideration that there's a part where the user add a comment for what he *ticked* then when exporting the config the comment will be there. He might add in the comment (I used exactly this config :...., or a link)
+Yeah that would be really nice. We could also use some kind of template to output the config to stdout, in order to provide a "scriptable" screenfetch like output
+
+... On IRC talking about z3bra's design Nb2:
+
+ +      venam │ I'm confused by it
+        z3bra │ by what ?
+ +      venam │ by how it's made
+ +      venam │ why is there different parts that have different trees and representation of the same data
+        z3bra │ like what ?
+        z3bra │ description / tips ?
+ +      venam │ applications
+ +      venam │ rice board
+ +      venam │ all of them
+ +      venam │ they all should share the same tree
+        z3bra │ Well, I'm limited by the application I use
+        dlind │ morning
+ +      venam │ just draw it in GIMP, don't worry about GUI, we're going to make our own thing in the end
+        z3bra │ The thing is that descriptions should describe ALL of the items
+        z3bra │ not only shell, but also "interactive, prompt, etc.."
+        z3bra │ So I thouhg a file tree would be the best representation for it
+        z3bra │ but for rice board, and application
+        z3bra │ the user only has to select the main sections
+        z3bra │ So there is no need for a tree
+        z3bra │ just "tabs" with the main section would be enough
+ +      venam │ The current config tab should have the final output not a bunch of checkboxes
+ +      venam │ I'm ok for the description but I'm not in to separate it from "how to rice it" and "tips", and I'm not in about having a list of predefined programs. 
+                I'd rather let the user write in the comment
+ +      venam │ whatever is needed
+ +      venam │ the thing we wrote about "interactive, aliases, completion, prompt" they are in the description with the rice and tips
+ +      venam │ *that's* what is riced
+ +      venam │ isn't that right
+ +      venam │ like for example: Shell: "Description: A command interpreter used to give ..., There are many types of shell (link to list)... In the ricing 
+                field...You can add aliases (links to info)... completion..
+ +      venam │ change the prompt... (example of a shell riced:link to screenshot)"
+        z3bra │ Yeah I see
+ +      venam │ as in 2 cases or "I don't know what I'm doing what's that thing called a shell... oh that's it, let's see what I can do and add it in the comments" or 
+                second case "I wanna keep track of what I did
+ +      venam │ config in my shell, ah yeah I forgot to add my aliases"
+ +      venam │ and I don't want the feel of having only a range of choices for softwares "ah my custom panel that I just wrote isn't in the list what should I do"
+ +      venam │ I'd have a panel section and the user add in the comments "I'm using links_to_thing with those configs link2"
+...
+        venam │ want to have a welcome screen of some sort that'll say "read info about different part of your customization, choose what you've already customized, 
+                and edit the comments to explain what you've done
+...
+        venam │ so, no more search
+        venam │ the "selection of customizing thing" should be near the name of the thing
+        venam │ a help kinda button somewhere
+        venam │ short and precise description box
+ @      z3bra │ yep
+ @      z3bra │ or a shortcut
+ @      z3bra │ '?' 
+ @      z3bra │ (in case we go with a curse interface)
+        venam │ keybind is the last thing we should think about
+        venam │ at the end we'll add shortcut for everything, like that advanced users will be satisfied
+        venam │ short and precise description box
+ @      z3bra │ okay
+ @      z3bra │ anyway, curse can handle mouse iirc
+        venam │ I'm not sure about the links and comments part
+ @      z3bra │ merge them, maybe
+        venam │ I think just leaving the comment will be enough
+        venam │ yeah
+ @      z3bra │ agreed
+        venam │ and just when you click the button, or whatever it is if it's not a button, it'll open the comment box so you can edit it
+
+
