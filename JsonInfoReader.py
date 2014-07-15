@@ -4,14 +4,15 @@ import json
 
 class JsonInfoReader:
     def __init__(self,infoFile, updater):
-        self._allInfo = json.load(open(infoFile,'r'))
+        self._infoFile = infoFile
+        self._allInfo  = json.load(open(infoFile,'r'))
         self._updater  = updater
 
     def refresh(self):
         self._allInfo = json.load(open(infoFile,'r'))
 
     def update(self):
-        if updater.hasNewInfo():
+        if updater.hasNewInfo(self._infoFile):
             try:
                 update.fetchNewInfo()
                 self.refresh()
