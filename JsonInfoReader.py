@@ -19,8 +19,10 @@ class JsonInfoReader:
                 print e
 
     def listCategories(self):
+        categories = []
         for info in self._allInfo:
-            print info
+            categories.append(info)
+        return categories
 
     def listInsideCategories(self,categorie):
         if categorie not in self._allInfo:
