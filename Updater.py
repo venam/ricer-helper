@@ -3,23 +3,27 @@ import time
 import md5
 
 class Updater:
-    def __init__(self,server):
-        self.server = server
+    def __init__(self,server,infoFile):
+        self._server = server
+        self._infoFile = infoFile
         self.br = URLopener()
 
-    def hasNewInfo(self,infoFile):
-        f = open(infoFile,'r').read()
-        m = md5.new(f).hexdiget()
-        response = self.br.open(self.server+'/hash').read()
-        return (m==response)
+    def hasNewInfo(self):
+        f = open(self._infoFile,'r').read()
+        m = md5.new(f).hexdigest()
+        response = self.br.open(self._server+'/hash').read()
+        response = response.replace("\n","")
+        print(response)
+        print(m)
+        return (m!=response)
 
     def generateTimeStamp(self):
         return str(time.gmtime().tm_year)+"_"+str(time.gmtime().tm_mday)+"_"+str(time.gmtime().tm_hour)+"_"+str(time.gmtime().tm_min)
 
     def fetchNewInfo(self):
         print ("fetching Info")
-        response = self.br.open(self.server+'/info.json').read()
-        oldInfo = open("info.json",'r').read()
-        open("info.json."+generateTimeStamp,'w').write(oldInfo)
-        open("info.json",'w').write(response)
+        response = self.br.open(self._server+'/info.json').read()
+        oldInfo = open(self._infoFile,'r').read()
+        open(self._infoFile+"."+self.generateTimeStamp(),'w').write(oldInfo)
+        open(self._infoFile,'w').write(response)
 

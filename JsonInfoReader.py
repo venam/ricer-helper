@@ -2,23 +2,24 @@
 
 import sys
 import json
+import Updater
 
 class JsonInfoReader:
-    def __init__(self,infoFile, updater):
+    def __init__(self,infoFile):
         self._infoFile = infoFile
         self._allInfo  = json.load(open(infoFile,'r'))
-        self._updater  = updater
+        self._updater  = Updater("http://venam.nixers.net", self._infoFile)
 
     def refresh(self):
         self._allInfo = json.load(open(self._allInfo,'r'))
 
     def update(self):
-        if self._updater.hasNewInfo(self._infoFile):
+        if self._updater.hasNewInfo():
             try:
                 self._updater.fetchNewInfo()
                 self.refresh()
             except Exception:
-               sys.exit() 
+                print("Problem Fetching new info")
 
     def listCategories(self):
         categories = []
