@@ -10,7 +10,7 @@ class JsonInfoReader:
         self._updater  = updater
 
     def refresh(self):
-        self._allInfo = json.load(open(infoFile,'r'))
+        self._allInfo = json.load(open(self._allInfo,'r'))
 
     def update(self):
         if self._updater.hasNewInfo(self._infoFile):
