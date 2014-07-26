@@ -8,7 +8,7 @@ class JsonInfoReader:
     def __init__(self,infoFile):
         self._infoFile = infoFile
         self._allInfo  = json.load(open(infoFile,'r'))
-        self._updater  = Updater("http://venam.nixers.net", self._infoFile)
+        self._updater  = Updater.Updater("http://venam.nixers.net", self._infoFile)
 
     def refresh(self):
         self._allInfo = json.load(open(self._allInfo,'r'))
