@@ -31,6 +31,7 @@ class JsonInfoReader:
             return ""
         for info in self._allInfo[category]:
             print( info)
+        return self._allInfo[category]
 
     def getInfo(self,name):
         category = self.getCategory(name)
