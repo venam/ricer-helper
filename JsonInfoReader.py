@@ -12,9 +12,9 @@ class JsonInfoReader:
         self._allInfo = json.load(open(infoFile,'r'))
 
     def update(self):
-        if updater.hasNewInfo(self._infoFile):
+        if self._updater.hasNewInfo(self._infoFile):
             try:
-                update.fetchNewInfo()
+                self._updater.fetchNewInfo()
                 self.refresh()
             except Exception,e:
                 print e
