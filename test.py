@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import Outputer
 import JsonInfoReader
 import State

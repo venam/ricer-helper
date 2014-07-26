@@ -10,7 +10,7 @@ def save(saveLocation,state):
     saveOutput += json.JSONEncoder().encode(state.selected)+"\n"
     saveOutput += "}\n"
     open(saveLocation,'w').write(saveOutput)
-    print saveOutput
+    print (saveOutput)
 
 def load(loadLocation, state):
     loaded         = json.load(open(loadLocation,'r'))

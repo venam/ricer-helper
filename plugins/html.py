@@ -1,5 +1,5 @@
 def getName():
-    print "html"
+    print ("html")
 
 def output(state,information):
-    print "outputing in HTML"
+    print ("outputing in HTML")

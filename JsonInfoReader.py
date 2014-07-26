@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import json
 
 class JsonInfoReader:
@@ -16,8 +17,8 @@ class JsonInfoReader:
             try:
                 self._updater.fetchNewInfo()
                 self.refresh()
-            except Exception,e:
-                print e
+            except Exception:
+               sys.exit() 
 
     def listCategories(self):
         categories = []
@@ -29,7 +30,7 @@ class JsonInfoReader:
         if categorie not in self._allInfo:
             return ""
         for info in self._allInfo[categorie]:
-            print info
+            print( info)
 
     def getInfo(self,name):
         categorie = self.getCategorie(name)
@@ -51,7 +52,7 @@ class JsonInfoReader:
         return thecategorie
 
     def update(self):
-        print "updating from server using Updater..."
+        print ("updating from server using Updater...")
 
 """
 if __name__ == "__main__" :

@@ -11,5 +11,5 @@ class Updater:
         return False
 
     def fetchNewInfo(self):
-        print "fetching Info"
+        print ("fetching Info")
 
