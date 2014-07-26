@@ -26,30 +26,30 @@ class JsonInfoReader:
             categories.append(info)
         return categories
 
-    def listInsideCategories(self,categorie):
-        if categorie not in self._allInfo:
+    def listInsideCategories(self,category):
+        if category not in self._allInfo:
             return ""
-        for info in self._allInfo[categorie]:
+        for info in self._allInfo[category]:
             print( info)
 
     def getInfo(self,name):
-        categorie = self.getCategorie(name)
-        if categorie not in self._allInfo:
+        category = self.getCategory(name)
+        if category not in self._allInfo:
             return ""
-        if name not in self._allInfo[categorie]:
+        if name not in self._allInfo[category]:
             return ""
-        return self._allInfo[categorie][name]
+        return self._allInfo[category][name]
 
-    def getCategorie(self,name):
-        thecategorie = ""
-        for categorie in self._allInfo:
-            for info in self._allInfo[categorie]:
+    def getCategory(self,name):
+        thecategory = ""
+        for category in self._allInfo:
+            for info in self._allInfo[category]:
                 if name == info:
-                    thecategorie = categorie
+                    thecategory = category
                     break
-            if thecategorie != "":
+            if thecategory != "":
                 break
-        return thecategorie
+        return thecategory
 
     def update(self):
         print ("updating from server using Updater...")
@@ -63,6 +63,6 @@ if __name__ == "__main__" :
     print "\n\n"
     print test.getInfo("Shell")
     print "\n\n"
-    print test.getCategorie("IM")
+    print test.getCategory("IM")
     print "\n\n"
 """
