@@ -1,6 +1,7 @@
 from urllib import URLopener
 #if python3
 #from urllib import request
+#from hashlib import md5
 import time
 import md5
 
@@ -15,6 +16,8 @@ class Updater:
     def hasNewInfo(self):
         f = open(self._infoFile,'r').read()
         m = md5.new(f).hexdigest()
+        #if python3
+        #m = md5(open(f,'rb').read()).hexdigest()
         response = self.br.open(self._server+'/hash').read()
         #if python3
         #response = self.br.urlopen(self._server+'/hash').read()
