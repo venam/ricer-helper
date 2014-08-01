@@ -1,7 +1,4 @@
 from urllib import URLopener
-#if python3
-#from urllib import request
-#from hashlib import md5
 import time
 import md5
 
@@ -10,17 +7,11 @@ class Updater:
         self._server = server
         self._infoFile = infoFile
         self.br = URLopener()
-        #if python3
-        #self.br = request
 
     def hasNewInfo(self):
         f = open(self._infoFile,'r').read()
         m = md5.new(f).hexdigest()
-        #if python3
-        #m = md5(open(f,'rb').read()).hexdigest()
         response = self.br.open(self._server+'/hash').read()
-        #if python3
-        #response = self.br.urlopen(self._server+'/hash').read()
         response = response.replace("\n","")
         print(response)
         print(m)
@@ -32,8 +23,6 @@ class Updater:
     def fetchNewInfo(self):
         print ("fetching Info")
         response = self.br.open(self._server+'/info.json').read()
-        #if python3
-        #response = self.br.urlopen(self._server+'/info.json').read()
         oldInfo = open(self._infoFile,'r').read()
         open(self._infoFile+"."+self.generateTimeStamp(),'w').write(oldInfo)
         open(self._infoFile,'w').write(response)

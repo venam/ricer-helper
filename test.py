@@ -5,7 +5,7 @@ import State
 
 out = Outputer.Outputer()
 state = State.State()
-info = JsonInfoReader.JsonInfoReader("info.json","blah")
+info = JsonInfoReader.JsonInfoReader("info.json")
 state.addSelect("Bootloader")
 state.addComment("Bootloader","I use a magenta... blah blah")
 state.addSelect("Window manager")
