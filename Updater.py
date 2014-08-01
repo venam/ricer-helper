@@ -6,9 +6,7 @@ class Updater:
     def __init__(self,server,infoFile):
         self._server = server
         self._infoFile = infoFile
-        self.br = URLopener()
-        #if python3
-        #self.br = request
+        self.br = request
 
     def hasNewInfo(self):
         f = open(self._infoFile,'r').read()
