@@ -7,8 +7,7 @@
         "Web browser": ""
     },
     "de/wm": {
-        "Compositor manager": "",
-        "DE": "Borders\nKeybindings\nTiling/floating\nconfigs (different type)",
+        "DE": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA desktop environment is usually a big packages of multiple softwares that together gives the user a working environment, in the sense that everything you'll ever need comes installed with the DE (Desktop Environment).\nThe number of softwares that are installed with a desktop environment varies greatly, some of them installs everyting from the window manager to the music player passing by the bluetooth manager.\nIn the ricing world desktop environments are rarely used because customizing them turns out into a job of uninstalling what has been installed and reconfiguring what has been configured for you.\nDE are a great choice if you don't have any time to create your own setup.\nRemember that everything that a DE is just a bunch of programs sticked together. They can still be installed outside of it.\nHere are the most common DE:\nCinnamon\nEnlightenment \nGNOME\nKDE\nLXDE\nXFCE\nMATE\nYou can find a bigger list here:\nhttp://en.wikipedia.org/wiki/Comparison_of_X_Window_System_desktop_environments\nMore information here:\nhttps://wiki.archlinux.org/index.php/Desktop_Environment\n",
         "GUI": "",
         "Status/Information system": "",
         "Wallpaper": "",
@@ -20,10 +19,10 @@
         "color scripts": ""
     },
     "raw": {
-        "Bootloader": "Background\nMenus\nFont\nsplash screen\nboot messages",
-        "Login managers": "bakcgrounds\ninput boxes\ntheme\nPAM (special plugin for Authentification)\ntype (TTY: HTML: ...)\nttys/gettytab login",
-        "Shell": "lightweight\ninteractive\naliases\ntab completion\nPrompt\nhttp://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/\nhttp://blog.twistedcode.org/2008/03/customizing-your-bash-prompt.html (dotdev) A simple guide for customizing bash prompts",
-        "TTY": "font\nframebuffer\ncolors (perl-term-extendedcolor-tty or just using `echo`)\nframebuffer consoles (mlterm)",
-        "multiplexers": ""
+        "Login managers": "There are many ways to identify yourself on your *nix machine\n    The default way is normally to simply use the TTY and enter your username and password\n    Some programs called \"login managers\" or \"display managers\" are available to pretify this process.\n    They can also be used as a middle man to choose the environment you'll be dropped in after login.\n    Most of them are fully themable, from the background, to the font, passing by the layout and input boxes.\n    List of Display managers:\n        https://wiki.archlinux.org/index.php/Display_Manager\n    Along with the login process you might want to use multiple ways of authentication or 2 ways authentication.\n    On GNU/Linux the PAM (Pluggable Authentication Module) can be used to create custom way to do that such as captchas.\n",
+        "Shell": "The Shell is the command line interface (CLI) that lets you interact with your OS, as opposed to the GUI (graphical user interface).\nList of some available shells:\n    http://www.labtestproject.com/list_of_linux_shell\n\nRemember that the shell is the door to your *nix world, a shell customized to your needs will make your life easier.\n\nThe most common things that are cutsomized in a shell are the following:\n    * adding aliases\n    * creating a custom prompt\n    * adding color wrappers\n    * customizing the way globing works\n    * adding special completion behavior\n    * customizing the behavior at specific times (inside git repo, at login, etc..)\n        http://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/\nmore documentation:\n    http://blog.twistedcode.org/2008/03/customizing-your-bash-prompt.html\n    https://wiki.archlinux.org/index.php/Bash\n    https://wiki.archlinux.org/index.php/Zsh\n    https://wiki.archlinux.org/index.php/Ksh\n\n",
+        "Multiplexers": "",
+        "Bootloader": "The program responsable to start the OS. Usually it is a Menu-Like program.\nThe most common ones are LILO and GRUB2.\nYou can configured the following in a bootloader:\n        Background (https://wiki.archlinux.org/index.php/Grub#Background_image_and_bitmap_fonts)\n        Menus \n        Font (or size of font, changed when the screen size is set: http://www.linuxquestions.org/questions/debian-26/change-console-font-size-70181/ )\n        splash screen (for systems like Ubuntu http://ubuntuforums.org/showthread.php?t=11478 )\n        A lot of information can be found here https://wiki.archlinux.org/index.php/Grub#Visual_configuration\n    boot messages (this is the job of the init system)\n\n",
+        "TTY": "font\nframebuffer\ncolors (perl-term-extendedcolor-tty or just using `echo`)\nframebuffer consoles (mlterm)"
     }
 }
