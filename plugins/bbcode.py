@@ -1,16 +1,12 @@
+
 def getName():
-    print ("html")
+    print ("bbcode")
 
 def output(state,information):
     categories = information.listCategories()
     selections = state.selected
     # testing the output by printing it to stdout 
-    print """
-<html>
-    <head>
-    </head>
-    <body>
-"""
+
     firstOne = True
     for category in categories:
         found = 0
@@ -20,15 +16,12 @@ def output(state,information):
                     found += 1
                     if found == 1:
                         if not firstOne:
-                            print( "</ul>")
-                        print ("<h2>" + category + "</h2>\n<ul>")
+                            print( "[/list]")
+                        print ("\n[size=9]" + category + "[/size]\n[list]\n")
                         firstOne = False
-                    print( "\n<li>\n<h3>"+ selection+"</h3><br/>")
+                    print( "[*][size=5]"+ selection+"[/size]")
                     commentLines = state.comments[selection].split("\n")
                     for line in commentLines :
-                        print (line+"<br/>")
-                    print "</li>"
-    print "</ul>"
-    print "</body>"
-    print "</html>"
+                        print ("    "+line)
+    print "[/list]"
 
