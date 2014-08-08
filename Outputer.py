@@ -30,9 +30,10 @@ class Outputer:
             m = importlib.import_module('plugins.'+available)
             m.getName()
 
-    def output(self, module, state, info):
+    def output(self, module, state, info, location):
          m = importlib.import_module('plugins.'+module)
-         m.output(state,info)
+         toSave = m.output(state,info)
+         open(location, 'w').write(toSave)
 
 """
 if __name__ == "__main__":

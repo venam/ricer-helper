@@ -1,15 +1,16 @@
 def getName():
-    print ("html")
+    return "html"
 
 def output(state,information):
     categories = information.listCategories()
     selections = state.selected
-    # testing the output by printing it to stdout 
-    print """
+    toSave     = ""
+    toSave    += """
 <html>
     <head>
     </head>
     <body>
+\n
 """
     firstOne = True
     for category in categories:
@@ -20,15 +21,16 @@ def output(state,information):
                     found += 1
                     if found == 1:
                         if not firstOne:
-                            print( "</ul>")
-                        print ("<h2>" + category + "</h2>\n<ul>")
+                            toSave += "</ul>\n"
+                        toSave += "<h2>" + category + "</h2>\n<ul>\n"
                         firstOne = False
-                    print( "\n<li>\n<h3>"+ selection+"</h3><br/>")
+                    toSave += "\n<li>\n<h3>"+ selection+"</h3><br/>\n"
                     commentLines = state.comments[selection].split("\n")
                     for line in commentLines :
-                        print (line+"<br/>")
-                    print "</li>"
-    print "</ul>"
-    print "</body>"
-    print "</html>"
+                        toSave += line+"<br/>\n"
+                    toSave += "</li>\n"
+    toSave += "</ul>\n"
+    toSave += "</body>\n"
+    toSave += "</html>\n"
+    return toSave
 
