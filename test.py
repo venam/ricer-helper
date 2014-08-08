@@ -12,5 +12,5 @@ state.addSelect("Window manager")
 state.addComment("Window manager", "2bwm ftw")
 state.addSelect("GUI")
 state.addComment("GUI", "gtk theme: a modified version of flatstudio that can be found here\nhttp://example.com")
-out.output("bbcode",state,info)
+out.output("markdown",state,info, "savedOutputTest")
 

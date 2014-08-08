@@ -1,13 +1,12 @@
 
 def getName():
-    print ("bbcode")
+    return "bbcode"
 
 def output(state,information):
     categories = information.listCategories()
     selections = state.selected
-    # testing the output by printing it to stdout 
-
-    firstOne = True
+    toSave     = ""
+    firstOne   = True
     for category in categories:
         found = 0
         for selection in selections:
@@ -16,12 +15,13 @@ def output(state,information):
                     found += 1
                     if found == 1:
                         if not firstOne:
-                            print( "[/list]")
-                        print ("\n[size=9]" + category + "[/size]\n[list]\n")
+                            toSave += "[/list]\n"
+                        toSave += "\n[size=9]" + category + "[/size]\n[list]\n\n"
                         firstOne = False
-                    print( "[*][size=5]"+ selection+"[/size]")
+                    toSave += "[*][size=5]"+ selection+"[/size]\n"
                     commentLines = state.comments[selection].split("\n")
                     for line in commentLines :
-                        print ("    "+line)
-    print "[/list]"
+                        toSave += "    "+line+"\n"
+    toSave += "[/list]"+"\n"
+    return toSave
 

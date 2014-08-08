@@ -1,11 +1,11 @@
 
 def getName():
-    print ("markdown")
+    return "markdown"
 
 def output(state,information):
     categories = information.listCategories()
     selections = state.selected
-# testing the output by printing it to stdout 
+    toSave     = ""
 
     for category in categories:
         found = 0
@@ -14,9 +14,10 @@ def output(state,information):
                 if state.comments[selection] :
                     found += 1
                     if found == 1:
-                        print( "\n#" + category + "\n")
-                    print( "* "+ selection)
+                        toSave += "\n#" + category + "\n\n"
+                    toSave += "* "+ selection+"\n"
                     commentLines = state.comments[selection].split("\n")
                     for line in commentLines :
-                        print ("    "+line)
+                        toSave += "    "+line+"\n"
+    return toSave
 
