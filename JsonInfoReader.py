@@ -8,18 +8,25 @@ class JsonInfoReader:
     def __init__(self,infoFile):
         self._infoFile = infoFile
         self._allInfo  = json.load(open(infoFile,'r'))
+        #might want to read that host from a file
         self._updater  = Updater.Updater("http://venam.nixers.net", self._infoFile)
 
     def refresh(self):
-        self._allInfo = json.load(open(self._allInfo,'r'))
+        try:
+            self._allInfo = json.load(open(self._infoFile,'r'))
+        except Exception:
+            print("cannot re-read file")
 
     def update(self):
         if self._updater.hasNewInfo():
             try:
                 self._updater.fetchNewInfo()
                 self.refresh()
+                return 0
             except Exception:
                 print("Problem Fetching new info")
+                return -1
+        return 2
 
     def listCategories(self):
         categories = []
@@ -53,8 +60,6 @@ class JsonInfoReader:
                 break
         return thecategory
 
-    def update(self):
-        print ("updating from server using Updater...")
 
 """
 if __name__ == "__main__" :
