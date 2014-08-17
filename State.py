@@ -6,6 +6,8 @@ class State:
         self.comments = {}
 
     def load(self, loadLocation):
+        self.selected = []
+        self.comments = {}
         JsonStateHandler.load(loadLocation,self)
 
     def save(self, savelocation):
