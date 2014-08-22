@@ -12,7 +12,9 @@ def save(saveLocation,state):
     open(saveLocation,'w').write(saveOutput)
 
 def load(loadLocation, state):
-    loaded         = json.load(open(loadLocation,'r'))
+    f              = open(loadLocation,'r')
+    loaded         = json.load(f)
+    f.close()
     state.comments = loaded['comments']
     state.selected = loaded['selections']
 

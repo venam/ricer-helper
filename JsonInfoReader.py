@@ -7,7 +7,9 @@ import Updater
 class JsonInfoReader:
     def __init__(self,infoFile):
         self._infoFile = infoFile
-        self._allInfo  = json.load(open(infoFile,'r'))
+        f              = open(infoFile,'r')
+        self._allInfo  = json.load(f)
+        f.close()
         #might want to read that host from a file
         self._updater  = Updater.Updater("http://venam.nixers.net", self._infoFile)
 
