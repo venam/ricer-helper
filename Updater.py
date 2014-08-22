@@ -13,15 +13,12 @@ class Updater:
         m = md5.new(f).hexdigest()
         response = self.br.open(self._server+'/hash').read()
         response = response.replace("\n","")
-        print(response)
-        print(m)
         return (m!=response)
 
     def generateTimeStamp(self):
         return str(time.gmtime().tm_year)+"_"+str(time.gmtime().tm_mday)+"_"+str(time.gmtime().tm_hour)+"_"+str(time.gmtime().tm_min)
 
     def fetchNewInfo(self):
-        print ("fetching Info")
         response = self.br.open(self._server+'/info.json').read()
         oldInfo = open(self._infoFile,'r').read()
         open(self._infoFile+"."+self.generateTimeStamp(),'w').write(oldInfo)

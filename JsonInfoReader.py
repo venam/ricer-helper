@@ -16,6 +16,7 @@ class JsonInfoReader:
             self._allInfo = json.load(open(self._infoFile,'r'))
         except Exception:
             print("cannot re-read file")
+            return -1
 
     def update(self):
         if self._updater.hasNewInfo():
@@ -24,7 +25,6 @@ class JsonInfoReader:
                 self.refresh()
                 return 0
             except Exception:
-                print("Problem Fetching new info")
                 return -1
         return 2
 
@@ -37,8 +37,6 @@ class JsonInfoReader:
     def listInsideCategories(self,category):
         if category not in self._allInfo:
             return ""
-        for info in self._allInfo[category]:
-            print( info)
         return self._allInfo[category]
 
     def getInfo(self,name):
