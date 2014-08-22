@@ -25,10 +25,11 @@ class Outputer:
         return availables
 
     def getAvailable(self):
-        availables = self.lister()
-        for available in availables:
-            m = importlib.import_module('plugins.'+available)
-            m.getName()
+        #availables = self.lister()
+        #for available in availables:
+        #    m = importlib.import_module('plugins.'+available)
+        #    m.getName()
+        return self.lister()
 
     def output(self, module, state, info, location):
          m = importlib.import_module('plugins.'+module)
