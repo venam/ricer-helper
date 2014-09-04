@@ -3,11 +3,28 @@ import plugins
 import pkgutil
 import inspect
 
+"""
+The purpose of the Outputer class it to provide a dynamic way of outputing
+the State object (State.py)
+It loads all the available plugins from a plugin directory
+"""
+
+
 PLUGIN_PATHS = ["plugins"]
 
 class Outputer:
+    """
+    Constructor takes the plugin path
+    """
+    def __init__(self, plugin_paths):
+        self.plugin_paths = [plugin_paths]
+
+    """
+    lister :: [String]
+    returns the list of available plugins
+    """
     def lister(self):
-        path = PLUGIN_PATHS
+        path = self.plugin_paths
         availables = []
         for loader, modname, is_pkg in pkgutil.walk_packages(path):
             module = loader.find_module(modname).load_module(modname)
@@ -24,6 +41,10 @@ class Outputer:
                 availables.append(modname)
         return availables
 
+    """
+    getAvailable :: [String]
+    a wrapper to return the list of available plugins
+    """
     def getAvailable(self):
         #availables = self.lister()
         
@@ -32,10 +53,21 @@ class Outputer:
         #    m.getName()
         return self.lister()
 
+    """
+    output :: String -> State -> JsonInfoReader -> String -> Void
+    takes the name of the output module (can be listed using getAvailable())
+    , a State object, a JsonInfoReader object, the location where you want
+    to save the output.
+    it will call the `output` method on the dynamically loaded module from the
+    plugin directory
+    """
     def output(self, module, state, info, location):
-         m = importlib.import_module('plugins.'+module)
-         toSave = m.output(state,info)
-         open(location, 'w').write(toSave)
+        toImp = self.plugin_paths[0].replace("/",".")
+        if not toImp.endswith("."):
+            toImp = toImp+"."
+        m = importlib.import_module(toImp+module)
+        toSave = m.output(state,info)
+        open(location, 'w').write(toSave)
 
 """
 if __name__ == "__main__":

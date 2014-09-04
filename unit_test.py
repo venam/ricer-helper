@@ -48,7 +48,7 @@ class RicerTest(unittest.TestCase):
         self.assertTrue(len(state.selected) > 0)
 
     def testOutputer(self):
-        out = Outputer.Outputer()
+        out = Outputer.Outputer("plugins")
         self.assertTrue(len(out.getAvailable())>0)
 
 def main():
